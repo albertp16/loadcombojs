@@ -1,0 +1,22 @@
+{
+  "name": "loadcombojs",
+  "version": "1.0.0",
+  "description": "loadcombojs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albertp16/loadcombojs.git"
+  },
+  "keywords": [
+    "LCJS"
+  ],
+  "author": "Albert Pamonag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/albertp16/loadcombojs/issues"
+  },
+  "homepage": "https://github.com/albertp16/loadcombojs#readme"
+}
