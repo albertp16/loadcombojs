@@ -196,7 +196,7 @@ lcService(1,0,0,0,0)
 console.log(valid)
 
 var testing = []
-
+//--> update
 //--> Computation of the Canadian Ultimate loads
 
 if(valid['D'] == 'ok') testing.push('test 1')
