@@ -1,3 +1,72 @@
+//test of CSA load combinatins
+
+console.log('CSA load combination')
+console.log('Working report')
+/*
+Load arrangements
+
+0,1,2,3,4,5,6,7,8 
+
+ID [0]; NOTATION[1] ;DEAD [2]; LIVE [3]; SNOW [4]; WIND [5]; EQ [6]; PRINCIPLE LOADS [7]; COMPANIONS LOADS [8]
+
+*/
+
+/*
+        "loads": {
+            "1": {
+                "DL": {
+                    "axial": 100,
+                    "shear_x": 0,
+                    "shear_z": 0,
+                    "moment_x": 0,
+                    "moment_z": 0
+                },
+                "LL": {
+                    "axial": 0,
+                    "shear_x": 0,
+                    "shear_z": 0,
+                    "moment_x": 0,
+                    "moment_z": 0
+                },
+                "W": {
+                    "axial": 0,
+                    "shear_x": 0,
+                    "shear_z": 0,
+                    "moment_x": 0,
+                    "moment_z": 0
+                },
+                "E": {
+                    "axial": 0,
+                    "shear_x": 0,
+                    "shear_z": 0,
+                    "moment_x": 0,
+                    "moment_z": 0
+                },
+                "LR": {
+                    "axial": 0,
+                    "shear_x": 0,
+                    "shear_z": 0,
+                    "moment_x": 0,
+                    "moment_z": 0
+                },
+                "RL": {
+                    "axial": 0,
+                    "shear_x": 0,
+                    "shear_z": 0,
+                    "moment_x": 0,
+                    "moment_z": 0
+                },
+                "SL": {
+                    "axial": 0,
+                    "shear_x": 0,
+                    "shear_z": 0,
+                    "moment_x": 0,
+                    "moment_z": 0
+                }
+            }
+
+*/
+//CSA A23.3-19/14/04/94 
 service = [
     null,
     [1,'S1',1,0,0,0,0,'D','-'],
@@ -43,3 +112,161 @@ factor = [
     [22,'U22',1,0.50,0.25,0,1,'D,E','L,S'],
     [23,'U23',1,0.50,0.25,0,-1,'D,E','L,S']        
 ]
+
+var loads = {
+    "1": {
+        "D": {
+            "axial": 8.7,
+            "shear_x": 6.5,
+            "shear_z": 0,
+            "moment_x": 21.75,
+            "moment_z": 0
+        },
+        "L": {
+            "axial": 10,
+            "shear_x": 0,
+            "shear_z": 0,
+            "moment_x": 0,
+            "moment_z": 0
+        },
+        "W": {
+            "axial": 0,
+            "shear_x": 0,
+            "shear_z": 0,
+            "moment_x": 0,
+            "moment_z": 0
+        },
+        "E": {
+            "axial": 0,
+            "shear_x": 0,
+            "shear_z": 0,
+            "moment_x": 0,
+            "moment_z": 0
+        },
+        "S": {
+            "axial": 1,
+            "shear_x": 0,
+            "shear_z": 0,
+            "moment_x": 0,
+            "moment_z": 0
+        }
+    }
+}
+
+// function test(axial,shear_x,shear_z,){
+
+// }
+
+valid = {
+
+}
+
+function lcService(D, L, S, W, E) {
+
+    var test = loads["1"] //soon revised the "1"
+    for(i in test){
+        // if(i === 0)
+        // console.log(i)
+        let axial = test[i]["axial"]
+        let shear_x = test[i]["shear_x"]
+        let shear_z = test[i]["shear_z"]
+        let moment_x = test[i]["moment_x"]
+        let moment_z = test[i]["moment_z"]
+
+        if(axial != 0 || shear_x != 0 || shear_z != 0 || moment_x != 0 || moment_z || 0){
+            valid[i] = "ok"
+        } else {
+            valid[i] = "-"
+        }
+
+    }
+
+	var results = {
+		// 'string': string,
+		// 'value': value
+	};
+
+	return results;
+
+}
+
+lcService(1,0,0,0,0)
+
+
+console.log(valid)
+
+var testing = []
+
+//--> Computation of the Canadian Ultimate loads
+
+if(valid['D'] == 'ok') testing.push('test 1')
+
+if(valid['D'] == 'ok' && valid['L'] == 'ok' || valid['S'] == 'ok'){
+    testing.push('test 2')
+    if(valid['S'] == 'ok'){
+        testing.push('test 3')
+    } 
+}
+
+if(valid['D'] == 'ok' && valid['L'] == 'ok' || valid['W'] == 'ok'){
+    testing.push('wind check')
+    if(valid['W'] == 'ok'){
+        testing.push('wind added')
+    } 
+}
+
+if(valid['D'] == 'ok' && valid['S'] == 'ok' || valid['L'] == 'ok'){
+    testing.push('wind check')
+    if(valid['W'] == 'ok'){
+        testing.push('wind added')
+    } 
+}
+
+if(valid['D'] == 'ok' && valid['S'] == 'ok' || valid['W'] == 'ok'){
+    testing.push('wind check')
+    if(valid['W'] == 'ok'){
+        testing.push('wind added')
+    } 
+}
+
+
+console.log(testing)
+
+// if(valid['D'] == 'ok' && valid['L'] != 'ok' && valid['S'] != 'ok'){
+//     testing.push('1')
+// } else if (valid['D'] == 'ok' && valid['L'] == 'ok' || valid['S'] == 'ok'){
+
+//     if(valid['S'] == 'ok'){
+//         console.log('test 3')
+//     } else {
+//         console.log('test 2')
+//     }
+// } else {
+//     console.log('Invalid load combinations')
+// }
+
+
+// var static_case = ["DL","LL","S","W","E"]
+// var complied = []
+
+
+
+
+// //for isolated.
+// var static_case = loads["1"]
+// for(var i in static_case){
+//     console.log(i)
+
+//     let axial = static_case[i]["axial"]
+
+// }
+
+//--> foundation set-up 
+
+
+
+
+
+
+
+
