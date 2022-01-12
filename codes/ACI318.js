@@ -53,6 +53,24 @@ function ASCE710service(D, L, E, W, LR, R, S){
             "text" : 'D + R', 
             "html" : 'D + R',
             "ref" : "2.4.1 Eq. 3"           
+        },
+        "4a" : {
+            "value" : SL4a,
+            "text" : 'D + (0.75 x L) + (0.75 x LR)', 
+            "html" : 'D + (0.75 x L) + (0.75 x L<sub>r</sub>)',
+            "ref" : "2.4.1 Eq. 4"           
+        },
+        "4b" : {
+            "value" : SL4b,
+            "text" : 'D + (0.75 x L) + (0.75 x S)', 
+            "html" : 'D + (0.75 x L) + (0.75 x S)',
+            "ref" : "2.4.1 Eq. 4"           
+        },
+        "4c" : {
+            "value" : SL4c,
+            "text" : 'D + (0.75 x L) + (0.75 x R)', 
+            "html" : 'D + (0.75 x L) + (0.75 x R)',
+            "ref" : "2.4.1 Eq. 4"           
         }
     }
 	
@@ -110,7 +128,7 @@ function ASCE710service(D, L, E, W, LR, R, S){
             ref_arr.push(load_combo["3c"]["ref"])
         }
     }
-	
+	//Equation 4
     if(D != 0 && L !=0 || LR !=0 || S !=0 || R != 0){
 
 		if(LR != 0) data.push(SL4a)
@@ -153,5 +171,5 @@ function ASCE710service(D, L, E, W, LR, R, S){
 }
 
 
-test = ASCE710service(100, 50, 0, 0, 0, 1, 10)
+test = ASCE710service(100, 50, 1, 1, 1, 1, 10)
 console.log(test)
