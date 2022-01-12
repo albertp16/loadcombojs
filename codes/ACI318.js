@@ -131,10 +131,27 @@ function ASCE710service(D, L, E, W, LR, R, S){
 	//Equation 4
     if(D != 0 && L !=0 || LR !=0 || S !=0 || R != 0){
 
-		if(LR != 0) data.push(SL4a)
-		if(S != 0) data.push(SL4b)
-		if(R != 0) data.push(SL4c)
-
+		// if(LR != 0) data.push(SL4a)
+		// if(S != 0) data.push(SL4b)
+		// if(R != 0) data.push(SL4c)
+		if(LR != 0) { 
+            value_arr.push(load_combo["4a"]["value"])
+            text_arr.push(load_combo["4a"]["text"])
+            html_arr.push(load_combo["4a"]["html"])
+            ref_arr.push(load_combo["4a"]["ref"])
+        }
+		if(S != 0) {
+            value_arr.push(load_combo["4b"]["value"])
+            text_arr.push(load_combo["4b"]["text"])
+            html_arr.push(load_combo["4b"]["html"])
+            ref_arr.push(load_combo["4b"]["ref"])
+        }
+		if(R != 0) {
+            value_arr.push(load_combo["4c"]["value"])
+            text_arr.push(load_combo["4c"]["text"])
+            html_arr.push(load_combo["4c"]["html"])
+            ref_arr.push(load_combo["4c"]["ref"])
+        }
 	}
 	if(D != 0 || E !=0 || W !=0 ){
 
