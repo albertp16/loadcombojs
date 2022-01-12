@@ -71,7 +71,19 @@ function ASCE710service(D, L, E, W, LR, R, S){
             "text" : 'D + (0.75 x L) + (0.75 x R)', 
             "html" : 'D + (0.75 x L) + (0.75 x R)',
             "ref" : "2.4.1 Eq. 4"           
-        }
+        },
+        "5a" : {
+            "value" : SL5a,
+            "text" : 'D + (0.6 x W)', 
+            "html" : 'D + (0.6 x W)',
+            "ref" : "2.4.1 Eq. 5"           
+        },
+        "5b" : {
+            "value" : SL5b,
+            "text" : 'D + (0.7 x E)', 
+            "html" : 'D + (0.7 x E)',
+            "ref" : "2.4.1 Eq. 5"            
+        },       
     }
 	
     // load_combo["SL1"]["value"] = D;
@@ -131,9 +143,6 @@ function ASCE710service(D, L, E, W, LR, R, S){
 	//Equation 4
     if(D != 0 && L !=0 || LR !=0 || S !=0 || R != 0){
 
-		// if(LR != 0) data.push(SL4a)
-		// if(S != 0) data.push(SL4b)
-		// if(R != 0) data.push(SL4c)
 		if(LR != 0) { 
             value_arr.push(load_combo["4a"]["value"])
             text_arr.push(load_combo["4a"]["text"])
@@ -155,9 +164,18 @@ function ASCE710service(D, L, E, W, LR, R, S){
 	}
 	if(D != 0 || E !=0 || W !=0 ){
 
-		if(W != 0) data.push(SL5a)
-		if(E != 0) data.push(SL5b)
-
+		if(W != 0) {
+            value_arr.push(load_combo["5a"]["value"])
+            text_arr.push(load_combo["5a"]["text"])
+            html_arr.push(load_combo["5a"]["html"])
+            ref_arr.push(load_combo["5a"]["ref"])
+        }
+        if(E != 0){ 
+            value_arr.push(load_combo["5b"]["value"])
+            text_arr.push(load_combo["5b"]["text"])
+            html_arr.push(load_combo["5b"]["html"])
+            ref_arr.push(load_combo["5b"]["ref"])
+        }
 	}
 	if(D !=0 && L != 0 && W != 0 || LR != 0 || S != 0 || R != 0){
 
