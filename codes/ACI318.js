@@ -266,5 +266,302 @@ function ASCE710service(D, L, E, W, LR, R, S){
 	return results
 
 }
-test = ASCE710service(100, 50, 1, 1, 1, 1, 10)
-console.log(test)
+
+function ACI31814factor(D, L, E, W, LR, R, S) {
+
+	var U1 = 1.4 * D;
+
+    /*
+    Equation 2 
+    Principal load = L 
+    */
+
+    var U2 = (1.2 * D) + (1.6 * L)
+	var U2a = (1.2 * D) + (1.6 * L) + (0.5 * LR);
+	var U2b = (1.2 * D) + (1.6 * L) + (0.5 * S);
+	var U2c = (1.2 * D) + (1.6 * L) + (0.5 * R);
+    
+    /*
+    Equation 3 
+    Principal load = Lr or S or R
+    */
+
+	var U3a = (1.2 * D) + (1.6 * LR);
+	var U3aa = (1.2 * D) + (1.6 * LR) + (1.0 * L);
+	var U3ab = (1.2 * D) + (1.6 * LR) + (0.5 * W);
+
+    var U3b = (1.2 * D) + (1.6 * S);
+    var U3ba = (1.2 * D) + (1.6 * S) + (1.0 * L);
+	var U3bb = (1.2 * D) + (1.6 * S) + (0.5 * W);
+	
+    var U3c = (1.2 * D) + (1.6 * R);
+	var U3ca = (1.2 * D) + (1.6 * R) + (1.0 * L);
+	var U3cb = (1.2 * D) + (1.6 * R) + (0.5 * W);
+
+	var U4 = (1.2*D) + (1.0*W);
+    var U4l = (1.2*D) + (1.0*W) + (1.0*L);
+	var U4lr = (1.2*D) + (1.0*W) + (1.0*L) + (0.5*LR);
+	var U4s = (1.2*D) + (1.0*W) + (1.0*L) + (0.5*S);
+	var U4r = (1.2*D) + (1.0*W) + (1.0*L) + (0.5*R);
+
+	var U5 = 1.2 * D + 1.0 * E + 1.0 * L + 0.2 * S;
+	var U6 = (0.9 * D) + (1.0 * W);
+	var U7 = (0.9 * D) + (1.0 * E);
+
+    var load_combo = {
+        "1" : {
+            "value" : U1,
+            "text" : '1.4 x D', 
+            "html" : '1.4 x D',
+            "ref" : "5.3.1a"
+        },
+        "2" : {
+            "value" : U2,
+            "text" : '(1.2 x D) + (1.6 x L)', 
+            "html" : '(1.2 x D) + (1.6 x L)',
+            "ref" : "5.3.1b"                      
+        },
+        "2a" : {
+            "value" : U2a,
+            "text" : '(1.2 x D) + (1.6 x L) + (0.5 x Lr)', 
+            "html" : '(1.2 x D) + (1.6 x L) + (0.5 x L<sub>r</sub>)',
+            "ref" : "5.3.1b"                     
+        },
+        "2b" : {
+            "value" : U2b,
+            "text" : '(1.2 x D) + (1.6 x L) + (0.5 x S)', 
+            "html" : '(1.2 x D) + (1.6 x L) + (0.5 x S)',
+            "ref" : "5.3.1b"                        
+        },
+        "2c" : {
+            "value" : U2c,
+            "text" : '(1.2 x D) + (1.6 x L) + (0.5 x R)', 
+            "html" : '(1.2 x D) + (1.6 x L) + (0.5 x R)',
+            "ref" : "5.3.1b"                       
+        }, 
+        "3a" : {
+            "value" : U3a,
+            "text" : '(1.2 * D) + (1.6 * LR)', 
+            "html" : '(1.2 * D) + (1.6 * L<sub>r</sub>)',
+            "ref" : "5.3.1c"                     
+        }, 
+        "3aa" : {
+            "value" : U3aa,
+            "text" : '(1.2 * D) + (1.6 * LR) + (1.0 * L)', 
+            "html" : '(1.2 * D) + (1.6 * L<sub>r</sub>) + (1.0 * L)',
+            "ref" : "5.3.1c"                     
+        },
+        "3ab" : {
+            "value" : U3ab,
+            "text" : '(1.2 * D) + (1.6 * LR) + (0.5 * W)', 
+            "html" : '(1.2 * D) + (1.6 * L<sub>r</sub>) + (0.5 * W)',
+            "ref" : "5.3.1c"                        
+        },
+        "3b" : {
+            "value" : U3b,
+            "text" : '(1.2 * D) + (1.6 * S)', 
+            "html" : '(1.2 * D) + (1.6 * S)',
+            "ref" : "5.3.1c"                     
+        }, 
+        "3ba" : {
+            "value" : U3ba,
+            "text" : '(1.2 * D) + (1.6 * S) + (1.0 * L)', 
+            "html" : '(1.2 * D) + (1.6 * S) + (1.0 * L)',
+            "ref" : "5.3.1c"                     
+        },
+        "3bb" : {
+            "value" : U3bb,
+            "text" : '(1.2 * D) + (1.6 * S) + (0.5 * W)', 
+            "html" : '(1.2 * D) + (1.6 * S) + (0.5 * W)',
+            "ref" : "5.3.1c"                        
+        },
+        "3c" : {
+            "value" : U3c,
+            "text" : '(1.2 * D) + (1.6 * R)', 
+            "html" : '(1.2 * D) + (1.6 * R)',
+            "ref" : "5.3.1c"                     
+        }, 
+        "3ca" : {
+            "value" : U3ca,
+            "text" : '(1.2 * D) + (1.6 * R) + (1.0 * L)', 
+            "html" : '(1.2 * D) + (1.6 * R) + (1.0 * L)',
+            "ref" : "5.3.1c"                     
+        },
+        "3cb" : {
+            "value" : U3cb,
+            "text" : '(1.2 * D) + (1.6 * R) + (0.5 * W)', 
+            "html" : '(1.2 * D) + (1.6 * R) + (0.5 * W)',
+            "ref" : "5.3.1c"                        
+        },
+        "4" : {
+            "value" : U4,
+            "text" : '(1.2 x D) + (1.0 x W)', 
+            "html" : '(1.2 x D) + (1.0 x W)',
+            "ref" : "5.3.1d"                     
+        },
+        "4l" : {
+            "value" : U4l,
+            "text" : '(1.2 x D) + (1.0 x W) + (1.0 x L)', 
+            "html" : '(1.2 x D) + (1.0 x W) + (1.0 x L)',
+            "ref" : "5.3.1d"                        
+        },
+        "4lr" : {
+            "value" : U4lr,
+            "text" : '(1.2 x D) + (1.0 x W) + (1.0 x L) + (0.5 x Lr)', 
+            "html" : '(1.2 x D) + (1.0 x W) + (1.0 x L) + (0.5 x Lr)',
+            "ref" : "5.3.1d"                     
+        }, 
+        "4s" : {
+            "value" : U4s,
+            "text" : '(1.2 x D) + (1.0 x W) + (1.0 x L) + (0.5 x S)', 
+            "html" : '(1.2 x D) + (1.0 x W) + (1.0 x L) + (0.5 x S)',
+            "ref" : "5.3.1d"                     
+        },
+        "4r" : {
+            "value" : U4r,
+            "text" : '(1.2 x D) + (1.0 x W) + (1.0 x L) + (0.5 x R)', 
+            "html" : '(1.2 x D) + (1.0 x W) + (1.0 x L) + (0.5 x R)',
+            "ref" : "5.3.1d"                        
+        },
+    }
+		
+    var value_arr = []
+    var text_arr = [] 
+    var html_arr = []
+    var ref_arr = []
+
+    var results = {
+        "value" : value_arr,
+        "text" : text_arr,
+        "html" : html_arr,
+        "ref" : ref_arr
+    }
+
+    //Equation 1
+    if(D != 0) { 
+        value_arr.push(load_combo["1"]["value"])
+        text_arr.push(load_combo["1"]["text"])
+        html_arr.push(load_combo["1"]["html"])
+        ref_arr.push(load_combo["1"]["ref"])
+    }
+
+    //Equation 2
+	if(D != 0 && L !=0 || LR != 0 || S != 0 || R != 0) { 
+        
+        if(D != 0 && L !=0 && LR == 0 && S == 0 && R == 0){
+            value_arr.push(load_combo["2"]["value"])
+            text_arr.push(load_combo["2"]["text"])
+            html_arr.push(load_combo["2"]["html"])
+            ref_arr.push(load_combo["2"]["ref"])
+        }
+        if(LR != 0){
+            value_arr.push(load_combo["2a"]["value"])
+            text_arr.push(load_combo["2a"]["text"])
+            html_arr.push(load_combo["2a"]["html"])
+            ref_arr.push(load_combo["2a"]["ref"])
+        }
+        if(S != 0){
+            value_arr.push(load_combo["2b"]["value"])
+            text_arr.push(load_combo["2b"]["text"])
+            html_arr.push(load_combo["2b"]["html"])
+            ref_arr.push(load_combo["2b"]["ref"])
+        }
+        if(R != 0){
+            value_arr.push(load_combo["2c"]["value"])
+            text_arr.push(load_combo["2c"]["text"])
+            html_arr.push(load_combo["2c"]["html"])
+            ref_arr.push(load_combo["2c"]["ref"])
+        }
+
+
+    }
+
+    //Equation 3 for Lr as Primary load 
+    if(D != 0 && LR !=0 || L != 0 || W != 0) { 
+        
+        if(D != 0 && LR !=0 && L == 0 && W == 0){
+
+            value_arr.push(load_combo["3a"]["value"])
+            text_arr.push(load_combo["3a"]["text"])
+            html_arr.push(load_combo["3a"]["html"])
+            ref_arr.push(load_combo["3a"]["ref"])
+        }
+
+        if(L != 0){
+            value_arr.push(load_combo["3aa"]["value"])
+            text_arr.push(load_combo["3aa"]["text"])
+            html_arr.push(load_combo["3aa"]["html"])
+            ref_arr.push(load_combo["3aa"]["ref"])
+        }
+        if(W != 0){
+            value_arr.push(load_combo["3ab"]["value"])
+            text_arr.push(load_combo["3ab"]["text"])
+            html_arr.push(load_combo["3ab"]["html"])
+            ref_arr.push(load_combo["3ab"]["ref"])
+        }
+
+    }
+
+    //Equation 3 for S as Primary load 
+    if(D != 0 && S !=0 || L != 0 || W != 0) { 
+        
+        if(D != 0 && S !=0 && L == 0 && W == 0){
+
+            value_arr.push(load_combo["3b"]["value"])
+            text_arr.push(load_combo["3b"]["text"])
+            html_arr.push(load_combo["3b"]["html"])
+            ref_arr.push(load_combo["3b"]["ref"])
+        }
+
+        if(L != 0){
+            value_arr.push(load_combo["3ba"]["value"])
+            text_arr.push(load_combo["3ba"]["text"])
+            html_arr.push(load_combo["3ba"]["html"])
+            ref_arr.push(load_combo["3ba"]["ref"])
+        }
+        if(W != 0){
+            value_arr.push(load_combo["3bb"]["value"])
+            text_arr.push(load_combo["3bb"]["text"])
+            html_arr.push(load_combo["3bb"]["html"])
+            ref_arr.push(load_combo["3bb"]["ref"])
+        }
+
+    }
+
+    //Equation 3 for R as Primary load 
+    if(D != 0 && R !=0 || L != 0 || W != 0) { 
+        
+        if(D != 0 && R !=0 && L == 0 && W == 0){
+
+            value_arr.push(load_combo["3c"]["value"])
+            text_arr.push(load_combo["3c"]["text"])
+            html_arr.push(load_combo["3c"]["html"])
+            ref_arr.push(load_combo["3c"]["ref"])
+        }
+
+        if(L != 0){
+            value_arr.push(load_combo["3ca"]["value"])
+            text_arr.push(load_combo["3ca"]["text"])
+            html_arr.push(load_combo["3ca"]["html"])
+            ref_arr.push(load_combo["3ca"]["ref"])
+        }
+        if(W != 0){
+            value_arr.push(load_combo["3cb"]["value"])
+            text_arr.push(load_combo["3cb"]["text"])
+            html_arr.push(load_combo["3cb"]["html"])
+            ref_arr.push(load_combo["3cb"]["ref"])
+        }
+
+    }
+
+    //Equation 4 
+
+	return results;
+
+}
+// test = ASCE710service(100, 50, 1, 1, 1, 1, 10)
+
+
+module.exports = {
+    ASCE710service
+}
