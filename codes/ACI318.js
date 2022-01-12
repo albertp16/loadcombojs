@@ -1,5 +1,10 @@
 console.log('ACI 318-14 Load Combination is working')
 
+//test of CSA load combinatins
+
+console.log('ACI 318-14 load combination')
+console.log('Working report')
+
 function ASCE710service(D, L, E, W, LR, R, S){
 	
     var SL1 = D;
@@ -101,12 +106,27 @@ function ASCE710service(D, L, E, W, LR, R, S){
             "text" : 'D + (0.75 x L) + (0.75 x (0.6 x W)) + (0.75 x R)', 
             "html" : 'D + (0.75 x L) + (0.75 x (0.6 x W)) + (0.75 x R)',
             "ref" : "2.4.1 Eq. 6a"           
+        }, 
+		"6b" : {
+            "value" : SL6ba,
+            "text" : 'D + (0.75 x L) + (0.75 x (0.7 * E)) + (0.75 * S)', 
+            "html" : 'D + (0.75 x L) + (0.75 x (0.7 x E)) + (0.75 x S)',
+            "ref" : "2.4.1 Eq. 6b"           
+        },   
+        "7" : {
+            "value" : SL7,
+            "text" : '(0.6 x D) + (0.6 x W)', 
+            "html" : '(0.6 x D) + (0.6 x W)',
+            "ref" : "2.4.1 Eq. 7"           
+        },    
+        "8" : {
+            "value" : SL8,
+            "text" : '(0.6 x D) + (0.7 x E)', 
+            "html" : '(0.6 x D) + (0.7 x E)',
+            "ref" : "2.4.1 Eq. 8"           
         },     
     }
-	
-    // load_combo["SL1"]["value"] = D;
-
-	
+		
 	var data = [] //stores the load combination here
     
     var value_arr = []
@@ -220,25 +240,31 @@ function ASCE710service(D, L, E, W, LR, R, S){
 	}
 	if(D !=0 && L != 0 && E != 0 && S != 0){
 
-		data.push(SL6ba)
+		value_arr.push(load_combo["6b"]["value"])
+		text_arr.push(load_combo["6b"]["text"])
+		html_arr.push(load_combo["6b"]["html"])
+		ref_arr.push(load_combo["6b"]["ref"])
 
 	}
 	if(D !=0 && W != 0 ){
 
-		data.push(SL7)
-
+		value_arr.push(load_combo["7"]["value"])
+		text_arr.push(load_combo["7"]["text"])
+		html_arr.push(load_combo["7"]["html"])
+		ref_arr.push(load_combo["7"]["ref"])
 	}
 
 	if(D !=0 && E != 0 ){
 
-		data.push(SL8)
+		value_arr.push(load_combo["8"]["value"])
+		text_arr.push(load_combo["8"]["text"])
+		html_arr.push(load_combo["8"]["html"])
+		ref_arr.push(load_combo["8"]["ref"])
 
 	}
 
 	return results
 
 }
-
-
 test = ASCE710service(100, 50, 1, 1, 1, 1, 10)
 console.log(test)
