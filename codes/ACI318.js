@@ -1,14 +1,8 @@
 console.log('ACI 318-14 Load Combination is working')
 
 function ASCE710service(D, L, E, W, LR, R, S){
-	// var load_combo = {
-    //     "SL1" : {
-    //         ""
-    //     }
-    // }
 	
-    // load_combo["SL1"]["value"] = D;
-	var SL1 = D;
+    var SL1 = D;
 	var SL2 = D + L;
 	var SL3a = D + LR;
 	var SL3b = D + S;
@@ -28,22 +22,96 @@ function ASCE710service(D, L, E, W, LR, R, S){
 
 	var SL7 = (0.6 * D) + (0.6 * W);
 	var SL8 = (0.6 * D) + (0.7 * E);
+    
+    var load_combo = {
+        "1" : {
+            "value" : SL1,
+            "text" : 'D', 
+            "html" : 'D',
+            "ref" : "2.4.1 Eq. 1"
+        },
+        "2" : {
+            "value" : SL2,
+            "text" : 'D + L', 
+            "html" : 'D + L',
+            "ref" : "2.4.1 Eq. 2"                      
+        },
+        "3a" : {
+            "value" : SL3a,
+            "text" : 'D + Lr', 
+            "html" : 'D + L<sub>r</sub>',
+            "ref" : "2.4.1 Eq. 3"           
+        },
+        "3b" : {
+            "value" : SL3b,
+            "text" : 'D + S', 
+            "html" : 'D + S',
+            "ref" : "2.4.1 Eq. 3"           
+        },
+        "3c" : {
+            "value" : SL3c,
+            "text" : 'D + R', 
+            "html" : 'D + R',
+            "ref" : "2.4.1 Eq. 3"           
+        }
+    }
+	
+    // load_combo["SL1"]["value"] = D;
+
 	
 	var data = [] //stores the load combination here
     
     var value_arr = []
-    var script = [] 
+    var text_arr = [] 
+    var html_arr = []
+    var ref_arr = []
 
-	// if(D != 0) value_arr.push(load_combo["SL1"]["value"])
-    if(D != 0) data.push(SL1)
-	if(D != 0 && L !=0) data.push(SL2)
+    var results = {
+        "value" : value_arr,
+        "text" : text_arr,
+        "html" : html_arr,
+        "ref" : ref_arr
+    }
+    //Equation 1
+    if(D != 0) { 
+        value_arr.push(load_combo["1"]["value"])
+        text_arr.push(load_combo["1"]["text"])
+        html_arr.push(load_combo["1"]["html"])
+        ref_arr.push(load_combo["1"]["ref"])
+    }
+
+    //Equation 2
+	if(D != 0 && L !=0) { 
+        value_arr.push(load_combo["2"]["value"])
+        text_arr.push(load_combo["2"]["text"])
+        html_arr.push(load_combo["2"]["html"])
+        ref_arr.push(load_combo["2"]["ref"])
+    }
+
+    //Equation 3
 	if(D != 0 || LR !=0 || S !=0 || R != 0){
 		
-		if(LR != 0) data.push(SL3a)
-		if(S != 0) data.push(SL3b)
-		if(R != 0) data.push(SL3c)
-	}
-	if(D != 0 && L !=0 || LR !=0 || S !=0 || R != 0){
+		if(LR != 0) { 
+            value_arr.push(load_combo["3a"]["value"])
+            text_arr.push(load_combo["3a"]["text"])
+            html_arr.push(load_combo["3a"]["html"])
+            ref_arr.push(load_combo["3a"]["ref"])
+        }
+		if(S != 0) {
+            value_arr.push(load_combo["3b"]["value"])
+            text_arr.push(load_combo["3b"]["text"])
+            html_arr.push(load_combo["3b"]["html"])
+            ref_arr.push(load_combo["3b"]["ref"])
+        }
+		if(R != 0) {
+            value_arr.push(load_combo["3c"]["value"])
+            text_arr.push(load_combo["3c"]["text"])
+            html_arr.push(load_combo["3c"]["html"])
+            ref_arr.push(load_combo["3c"]["ref"])
+        }
+    }
+	
+    if(D != 0 && L !=0 || LR !=0 || S !=0 || R != 0){
 
 		if(LR != 0) data.push(SL4a)
 		if(S != 0) data.push(SL4b)
@@ -80,10 +148,10 @@ function ASCE710service(D, L, E, W, LR, R, S){
 
 	}
 
-	return data
+	return results
 
 }
 
 
-test = ASCE710service(100, 0, 0, 0, 0, 0, 0)
+test = ASCE710service(100, 50, 0, 0, 0, 1, 10)
 console.log(test)
