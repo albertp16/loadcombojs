@@ -83,7 +83,25 @@ function ASCE710service(D, L, E, W, LR, R, S){
             "text" : 'D + (0.7 x E)', 
             "html" : 'D + (0.7 x E)',
             "ref" : "2.4.1 Eq. 5"            
-        },       
+        },  
+        "6aa" : {
+            "value" : SL6aa,
+            "text" : 'D + (0.75 x L) + (0.75 x (0.6 x W)) + (0.75 x LR)', 
+            "html" : 'D + (0.75 x L) + (0.75 x (0.6 x W)) + (0.75 x L<sub>r</sub>)',
+            "ref" : "2.4.1 Eq. 6a"           
+        },
+        "6ab" : {
+            "value" : SL6ab,
+            "text" : 'D + (0.75 x L) + (0.75 x (0.6 x W)) + (0.75 x S)', 
+            "html" : 'D + (0.75 x L) + (0.75 x (0.6 x W)) + (0.75 x S)',
+            "ref" : "2.4.1 Eq. 6a"           
+        },
+        "6ac" : {
+            "value" : SL6ac,
+            "text" : 'D + (0.75 x L) + (0.75 x (0.6 x W)) + (0.75 x R)', 
+            "html" : 'D + (0.75 x L) + (0.75 x (0.6 x W)) + (0.75 x R)',
+            "ref" : "2.4.1 Eq. 6a"           
+        },     
     }
 	
     // load_combo["SL1"]["value"] = D;
@@ -178,10 +196,26 @@ function ASCE710service(D, L, E, W, LR, R, S){
         }
 	}
 	if(D !=0 && L != 0 && W != 0 || LR != 0 || S != 0 || R != 0){
+        
+		if(LR != 0) { 
+            value_arr.push(load_combo["6aa"]["value"])
+            text_arr.push(load_combo["6aa"]["text"])
+            html_arr.push(load_combo["6aa"]["html"])
+            ref_arr.push(load_combo["6aa"]["ref"])
+        }
+		if(S != 0) {
+            value_arr.push(load_combo["6ab"]["value"])
+            text_arr.push(load_combo["6ab"]["text"])
+            html_arr.push(load_combo["6ab"]["html"])
+            ref_arr.push(load_combo["6ab"]["ref"])
+        }
+		if(R != 0) {
+            value_arr.push(load_combo["6ac"]["value"])
+            text_arr.push(load_combo["6ac"]["text"])
+            html_arr.push(load_combo["6ac"]["html"])
+            ref_arr.push(load_combo["6ac"]["ref"])
+        }
 
-		if(LR != 0) data.push(SL6aa)
-		if(S != 0) data.push(SL6ab)
-		if(R != 0) data.push(SL6ac)
 
 	}
 	if(D !=0 && L != 0 && E != 0 && S != 0){
