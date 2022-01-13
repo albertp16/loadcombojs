@@ -1,6 +1,5 @@
-function test(){
-    string = 'Hello World'
-    return string
-}
+const american = require('./codes/ACI318') //American load combinations
 
-module.exports = test
+
+
+module.exports = american
