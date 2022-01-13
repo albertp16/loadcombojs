@@ -153,13 +153,9 @@ var loads = {
     }
 }
 
-// function test(axial,shear_x,shear_z,){
 
-// }
 
-valid = {
-
-}
+valid = {}
 
 function lcService(D, L, S, W, E) {
 
