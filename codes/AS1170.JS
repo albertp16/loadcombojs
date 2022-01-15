@@ -1,8 +1,27 @@
-console.log('AS1170 load combination')
+console.log('AS1170:2002 load combination')
 console.log('Australian Standard')
+/*
+	Clause 4.2.3 Combination for snow, liquid pressure, rainwater ponding, groundwater and earthpressure. 
 
+	Where appropriate to the design situation, the basic combination shall be modified for the 
+	action of liquid pressure, ground water and earth pressure by the use of the following factor values: 
 
+	(a) Su = Fsn for snow determined in accordance with AS/NZS 1170.3
+	(b) Where the liquid type and density is well defined and design liquid height cannot be exceed -- 
+			(i) Su = 1.2Flp for static liquid pressure
+			(ii) for self-weight for stored liquid, use the factor for permanent action. 
+	(c) Where liquid type or density is not well definied or design liquied height is not limited -- 
+			(i) Su = 1.5Flp for static liquid pressure; and
+			(ii) for self-weight of stored liquid, use the factor imposed action.
+	(e) Su = 1.2Fgw for ground water where the ground water level is as given in AS/NZS 1170.1, otherwise 
+			Su = 1.5Fgw 
+	(f) For earth pressures: 
+			(i) Su = 1.0Fc,u when Fc,u is determined using an ultimit limit states methods.
+			(ii) Su = 1.5Fc when using other methods. 
+	(g) Su = 1.2Fice for ice determined in accordance with AS/NZS 1170.3  
 
+*/
+		
 function stabilityAS360009(G, Q, Wu, Eu, Su, psic){
 	
 	var SL1 = 0.90*G;
@@ -47,8 +66,7 @@ function strengthAS360009(G, Q, Wu, Eu, Su, psic, psil){
 }
 
 
-function SLS(){
-
+// function SLS(){
 class ULS{
     constructor(G, Q, Wu, Eu, Su, psic, psil){
         this.G = G;
@@ -68,28 +86,7 @@ class ULS{
         var SL5 = (1.2*G) + Eu + (psic*Q);
         var SL6 = (1.2*G) + Su + (psic*Q);
 		
-		/*
-		Clause 4.2.3 Combination for snow, liquid pressure, rainwater ponding, groundwater and earthpressure. 
 
-		Where appropriate to the design situation, the basic combination shall be modified for the 
-		action of liquid pressure, ground water and earth pressure by the use of the following factor values: 
-
-		(a) Su = Fsn for snow determined in accordance with AS/NZS 1170.3
-		(b) Where the liquid type and density is well defined and design liquid height cannot be exceed -- 
-			(i) Su = 1.2Flp for static liquid pressure
-			(ii) for self-weight for stored liquid, use the factor for permanent action. 
-		(c) Where liquid type or density is not well definied or design liquied height is not limited -- 
-			(i) Su = 1.5Flp for static liquid pressure; and
-			(ii) for self-weight of stored liquid, use the factor imposed action.
-		(e) Su = 1.2Fgw for ground water where the ground water level is as given in AS/NZS 1170.1, otherwise 
-			Su = 1.5Fgw 
-		(f) For earth pressures: 
-			(i) Su = 1.0Fc,u when Fc,u is determined using an ultimit limit states methods.
-			(ii) Su = 1.5Fc when using other methods. 
-		(g) Su = 1.2Fice for ice determined in accordance with AS/NZS 1170.3  
-
-		*/
-		
 		var load_combo = {
 			"1": {
 				"value": SL1,
@@ -164,8 +161,74 @@ class ULS{
         return results;	
     }
     strength(){
+        var SL1 = (1.35*G);
+        var SL2 = (1.2*G) + (1.5*Q);
+        var SL3 = (1.2*G) + (1.5*psil*Q);
+        var SL4 = (1.2*G) + Wu + (1.5*psic*Q);
+        var SL5 = (0.9*G) + (1.0*Wu);
+        var SL6 = G + Eu + (psic*Q);
+        var SL7 = (1.2*G) + Su + (psic*Q);
+        
+        var load_combo = {
+			"1": {
+				"value": SL1,
+				"text": '[1.35G]',
+				"html": '[1.35G]',
+				"ref": "4.2.2 (a)",
+				"notation" : "Ed",
+				"remarks" : "permanent action only (does not apply to prestressing force)" 
+			},
+			"2": {
+				"value": SL2,
+				"text": '[1.20G,1.5Q]',
+				"html": '[1.20G,1.5Q]',
+				"ref": "4.2.2 (b)",				
+				"notation": "Ed",
+				"remarks" : "permanent and imposed action" 
+			},
+			"3": {
+				"value": SL3,
+				"text": '[1.20G,1.5ψlQ]',
+				"html": '[1.20G,1.5ψ<sub>l</sub>Q]',
+				"ref": "4.2.2 (c)",				
+				"notation": "Ed",
+				"remarks" : "permanent and long-term imposed action" 
+			},
+			"4": {
+				"value": SL4,
+				"text": '[1.2G,Wu,ψcQ]',
+				"html": '[1.2G,Wu,ψ<sub>c</sub>Q]',
+				"ref": "4.2.2 (d)",				
+				"notation": "Ed",
+				"remarks" : "permanent, wind and imposed action" 
+			},
+			"5": {
+				"value": SL5,
+				"text": '[0.9G,Wu]',
+				"html": '[0.9G,Wu]',
+				"ref": "4.2.2 (e)",				
+				"notation": "Ed",
+				"remarks" : "permanent, wind action reversal" 
+			},
+			"6": {
+				"value": SL6,
+				"text": '[G,E,ψEQ]',
+				"html": '[G,E,ψ<sub>E</sub>Q]',
+				"ref": "4.2.2 (f)",				
+				"notation": "Ed",
+				"remarks" : "permanent, earthquake and imposed action" 
+			},
+            "7": {
+				"value": SL7,
+				"text": '[1.2G,Su,ψcQ]',
+				"html": '[1.2G,S<sub>u</sub>,ψ<sub>c</sub>Q]',
+				"ref": "4.2.2 (g)",				
+				"notation": "Ed",
+				"remarks" : "permanent action, actions given in Clause 4.2.3 and imposed actions" 
+			}
+		}
 
     }
 }
 
-}
+// }
