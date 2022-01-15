@@ -5,6 +5,7 @@ console.log('ACI 318-14 Load Combination is working')
 console.log('ACI 318-14 load combination')
 console.log('Working report')
 
+//--> Research the proper
 function ASCE710service(D, L, E, W, LR, R, S) {
 
     var SL1 = D;
