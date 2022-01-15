@@ -1,12 +1,19 @@
 console.log('ACI 318-14 Load Combination is working')
 
-//test of CSA load combinatins
+/**
+ * Load combination notations 
+ * 
+ * @param {integer} D Dead load
+ * @param {integer} L Live load
+ * @param {integer} E Earthquake load 
+ * @param {integer} W Wind load 
+ * @param {integer} LR Roof live load
+ * @param {integer} R Rain load
+ * @param {integer} S Snow load
+ * 
+ */
 
-console.log('ACI 318-14 load combination')
-console.log('Working report')
-
-//--> Research the proper
-function ASCE710service(D, L, E, W, LR, R, S) {
+export function ASCE710service(D, L, E, W, LR, R, S) {
 
     var SL1 = D;
     var SL2 = D + L;
@@ -266,7 +273,7 @@ function ASCE710service(D, L, E, W, LR, R, S) {
 
 }
 
-function ACI31814factor(D, L, E, W, LR, R, S) {
+export function ACI31814factor(D, L, E, W, LR, R, S) {
 
     var U1 = 1.4 * D;
     /*
@@ -698,7 +705,7 @@ function ACI31814factor(D, L, E, W, LR, R, S) {
 }
 // test = ASCE710service(100, 50, 1, 1, 1, 1, 10)
 
-module.exports = {
-    ASCE710service,
-    ACI31814factor
-}
+// module.exports = {
+//     ASCE710service,
+//     ACI31814factor
+// }
