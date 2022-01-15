@@ -35,14 +35,13 @@ class ULS{
     }
     stability(){
 
-        var SL1 = 0.90*G; //stabilizing effect
-        var SL2 = 1.35*G;  
-        var SL3 = (1.20*G) + (1.5*Q);
-        var SL4 = (1.3*G) + Wu + (psic*Q);
-        var SL5 = (1.2*G) + Eu + (psic*Q);
-        var SL6 = (1.2*G) + Su + (psic*Q);
+        var SL1 = 0.90*this.G; //stabilizing effect
+        var SL2 = 1.35*this.G;  
+        var SL3 = (1.20*this.G) + (1.5*this.Q);
+        var SL4 = (1.3*this.G) + this.Wu + (this.psic*this.Q);
+        var SL5 = (1.2*this.G) + this.Eu + (this.psic*this.Q);
+        var SL6 = (1.2*this.G) + this.Su + (this.psic*this.Q);
 		
-
 		var load_combo = {
 			"1": {
 				"value": SL1,
@@ -106,24 +105,33 @@ class ULS{
 			"ref": ref_arr
 		}
 
-        var service_load_string = ['Sta1', 'Sta2', 'Sta3', 'Sta4', 'Sta5', 'Sta6'];
-        var service_load = [SL1, SL2, SL3, SL4, SL5, SL6];
+		//Equation 1
+		if (this.G != 0) {
+			value_arr.push(load_combo["1"]["value"])
+			text_arr.push(load_combo["1"]["text"])
+			html_arr.push(load_combo["1"]["html"])
+			ref_arr.push(load_combo["1"]["ref"])
+		}
+
+		if (this.G != 0) {
+			value_arr.push(load_combo["1"]["value"])
+			text_arr.push(load_combo["1"]["text"])
+			html_arr.push(load_combo["1"]["html"])
+			ref_arr.push(load_combo["1"]["ref"])
+		}
     
-        var results = {
-            'string': service_load_string,
-            'value': service_load
-        };
     
         return results;	
     }
     strength(){
-        var SL1 = (1.35*G);
-        var SL2 = (1.2*G) + (1.5*Q);
-        var SL3 = (1.2*G) + (1.5*psil*Q);
-        var SL4 = (1.2*G) + Wu + (1.5*psic*Q);
-        var SL5 = (0.9*G) + (1.0*Wu);
-        var SL6 = G + Eu + (psic*Q);
-        var SL7 = (1.2*G) + Su + (psic*Q);
+
+        var SL1 = (1.35*this.G);
+        var SL2 = (1.2*this.G) + (1.5*this.Q);
+        var SL3 = (1.2*this.G) + (1.5*this.psil*this.Q);
+        var SL4 = (1.2*this.G) + this.Wu + (1.5*this.psic*this.Q);
+        var SL5 = (0.9*this.G) + (1.0*this.Wu);
+        var SL6 = this.G + this.Eu + (this.psic*this.Q);
+        var SL7 = (1.2*this.G) + this.Su + (this.psic*this.Q);
         
         var load_combo = {
 			"1": {
@@ -187,4 +195,13 @@ class ULS{
     }
 }
 
-// }
+// G = 1
+// Q = 0 
+// Wu = 1
+// Eu = 1 
+// Su = 1 
+// psic = 1
+// psil = 1
+var test = new ULS(1, 1, 1, 1, 1, 1, 1)
+var test2 = test.stability()
+console.log(test2)
