@@ -22,50 +22,6 @@ console.log('Australian Standard')
 
 */
 		
-function stabilityAS360009(G, Q, Wu, Eu, Su, psic){
-	
-	var SL1 = 0.90*G;
-	var SL2 = 1.35*G;
-	var SL3 = (1.20*G) + 1.5*Q;
-	var SL4 = (1.3*G) + Wu + (psic*Q);
-	var SL5 = (1.2*G) + Eu + (psic*Q);
-	var SL6 = (1.2*G) + Su + (psic*Q);
-
-	var service_load_string = ['Sta1', 'Sta2', 'Sta3', 'Sta4', 'Sta5', 'Sta6'];
-	var service_load = [SL1, SL2, SL3, SL4, SL5, SL6];
-
-	var results = {
-		'string': service_load_string,
-		'value': service_load
-	};
-
-	return results;	
-
-}
-
-function strengthAS360009(G, Q, Wu, Eu, Su, psic, psil){
-	
-	var SL1 = (1.35*G);
-	var SL2 = (1.2*G) + (1.5*Q);
-	var SL3 = (1.2*G) + (1.5*psil*Q);
-	var SL4 = (1.2*G) + Wu + (1.5*psic*Q);
-	var SL5 = (0.9*G) + (1.0*Wu);
-	var SL6 = G + Eu + (psic*Q);
-	var SL7 = (1.2*G) + Su + (psic*Q);	
-
-	var factor_load_string = ['Str1', 'Str2', 'Str3', 'Str4', 'Str5', 'Str6', 'Str7'];
-	var factor_load = [SL1, SL2, SL3, SL4, SL5, SL6, SL7];
-
-	var results = {
-		'string': factor_load_string,
-		'value': factor_load
-	};
-
-	return results;	
-
-}
-
-
 // function SLS(){
 class ULS{
     constructor(G, Q, Wu, Eu, Su, psic, psil){
