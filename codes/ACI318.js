@@ -13,7 +13,7 @@ console.log('ACI 318-14 Load Combination is working')
  * 
  */
 
-export function ASCE710service(D, L, E, W, LR, R, S) {
+function ASCE710service(D, L, E, W, LR, R, S) {
 
     var SL1 = D;
     var SL2 = D + L;
@@ -273,7 +273,7 @@ export function ASCE710service(D, L, E, W, LR, R, S) {
 
 }
 
-export function ACI31814factor(D, L, E, W, LR, R, S) {
+function ACI31814factor(D, L, E, W, LR, R, S) {
 
     var U1 = 1.4 * D;
     /*
@@ -705,7 +705,7 @@ export function ACI31814factor(D, L, E, W, LR, R, S) {
 }
 // test = ASCE710service(100, 50, 1, 1, 1, 1, 10)
 
-// module.exports = {
-//     ASCE710service,
-//     ACI31814factor
-// }
+module.exports = {
+    ASCE710service,
+    ACI31814factor
+}
