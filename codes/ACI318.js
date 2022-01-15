@@ -1,15 +1,15 @@
 console.log('ACI 318-14 Load Combination is working')
 
 /**
- * Load combination notations 
+ * Load combination notations for service load or Allowable Stress Design (ASD): 
  * 
- * @param {integer} D Dead load
- * @param {integer} L Live load
- * @param {integer} E Earthquake load 
- * @param {integer} W Wind load 
- * @param {integer} LR Roof live load
- * @param {integer} R Rain load
- * @param {integer} S Snow load
+ * @param {float} D Dead load
+ * @param {float} L Live load
+ * @param {float} E Earthquake load 
+ * @param {float} W Wind load 
+ * @param {float} LR Roof live load
+ * @param {float} R Rain load
+ * @param {float} S Snow load
  * 
  */
 
@@ -273,6 +273,18 @@ function ASCE710service(D, L, E, W, LR, R, S) {
 
 }
 
+/**
+ * Load combination notations for factor load or Load Factored Resistance Design (LFRD): 
+ * 
+ * @param {float} D Dead load
+ * @param {float} L Live load
+ * @param {float} E Earthquake load 
+ * @param {float} W Wind load 
+ * @param {float} LR Roof live load
+ * @param {float} R Rain load
+ * @param {float} S Snow load
+ * 
+ */
 function ACI31814factor(D, L, E, W, LR, R, S) {
 
     var U1 = 1.4 * D;
