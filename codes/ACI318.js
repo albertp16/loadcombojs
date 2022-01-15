@@ -268,22 +268,18 @@ function ASCE710service(D, L, E, W, LR, R, S) {
 function ACI31814factor(D, L, E, W, LR, R, S) {
 
     var U1 = 1.4 * D;
-
     /*
     Equation 2 
     Principal load = L 
     */
-
     var U2 = (1.2 * D) + (1.6 * L)
     var U2a = (1.2 * D) + (1.6 * L) + (0.5 * LR);
     var U2b = (1.2 * D) + (1.6 * L) + (0.5 * S);
     var U2c = (1.2 * D) + (1.6 * L) + (0.5 * R);
-
     /*
     Equation 3 
     Principal load = Lr or S or R
     */
-
     var U3a = (1.2 * D) + (1.6 * LR);
     var U3aa = (1.2 * D) + (1.6 * LR) + (1.0 * L);
     var U3ab = (1.2 * D) + (1.6 * LR) + (0.5 * W);
@@ -299,7 +295,6 @@ function ACI31814factor(D, L, E, W, LR, R, S) {
     /*
     Equation 4 
     */
-
     var U4 = (1.2 * D) + (1.0 * W); //checking if this okay to include
     var U4l = (1.2 * D) + (1.0 * W) + (1.0 * L);
     var U4lr = (1.2 * D) + (1.0 * W) + (1.0 * L) + (0.5 * LR);
@@ -701,7 +696,6 @@ function ACI31814factor(D, L, E, W, LR, R, S) {
 
 }
 // test = ASCE710service(100, 50, 1, 1, 1, 1, 10)
-
 
 module.exports = {
     ASCE710service,
